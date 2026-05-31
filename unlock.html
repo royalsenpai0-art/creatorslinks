@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>CreatorsLink - Unlock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="unlock-page">
+
+  <!-- HEADER -->
+  <header class="unlock-header">
+    <div class="unlock-header-inner">
+      <div class="unlock-logo">CreatorsLink</div>
+      <a href="/" class="unlock-create-link">+ Create Link</a>
+    </div>
+  </header>
+
+  <!-- MAIN SECTION -->
+  <section class="unlock-section">
+
+    <div class="unlock-card">
+      <div class="trust-badge">
+        🔒 Secure Verification
+      </div>
+      <h1>Complete Steps to Unlock</h1>
+      <p>Complete all tasks below to access your destination link</p>
+
+      <!-- Progress -->
+      <div class="unlock-progress-wrapper">
+        <div class="unlock-progress-bar">
+          <div class="unlock-progress-fill" id="progressBar"></div>
+        </div>
+        <div id="progressText">0/0 Completed</div>
+      </div>
+
+      <!-- Tasks -->
+      <div id="tasksBox"></div>
+
+      <!-- Unlock Button -->
+      <button id="unlockBtn" class="unlock-button locked" disabled>
+        🔒 Unlock Link
+      </button>
+      <div id="successBox" class="success-box">
+        <div class="success-icon">✓</div>
+        <h3>Verification Successful</h3>
+        <p>Redirecting to destination...</p>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="unlock-faq">
+
+    <h2>FAQ</h2>
+
+    <div class="faq-container">
+
+      <div class="faq-item">
+        <div class="faq-question">
+          How to unlock link?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Complete all tasks above. Once done, unlock button activates automatically.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Why complete tasks?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Tasks help creators grow their social presence while giving you access to exclusive content.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          Is CreatorsLink free?
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Yes, CreatorsLink is completely free to use.
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer class="unlock-footer">
+    © 2026 CreatorsLink - All Rights Reserved
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    let completed = 0;
+    let total = 0;
+    let finalURL = "";
+
+    fetch("/api/link/" + id)
+      .then(res => res.json())
+      .then(data => {
+
+        total = data.tasks.length;
+        finalURL = data.destination;
+
+        document.getElementById("progressText").innerText =
+          "0/" + total + " Completed";
+
+        data.tasks.forEach(task => {
+
+          const link = data.taskLinks[task];
+
+          document.getElementById("tasksBox").innerHTML += `
+      <button class="unlock-task"
+        onclick="completeTask(this,'${link}')">
+        ${task}
+      </button>
+    `;
+        });
+
+      });
+
+    function completeTask(button, link) {
+
+      if (button.classList.contains("done")) return;
+
+      window.open(link, "_blank");
+
+      button.classList.add("done");
+      button.innerText = "✅ Completed";
+      button.disabled = true;
+
+      completed++;
+
+      const percent = (completed / total) * 100;
+
+      document.getElementById("progressBar").style.width = percent + "%";
+      document.getElementById("progressText").innerText =
+        completed + "/" + total + " Completed";
+
+      if (completed >= total) {
+        const btn = document.getElementById("unlockBtn");
+        btn.disabled = false;
+        btn.classList.remove("locked");
+        btn.classList.add("active");
+        btn.innerText = "🚀 Unlock Link";
+      }
+    }
+
+    document.getElementById("unlockBtn").onclick = function () {
+
+      if (this.disabled) return;
+
+      const btn = this;
+      btn.disabled = true;
+
+      let count = 3;
+      btn.innerText = "Verifying... 3";
+
+      const timer = setInterval(() => {
+
+        count--;
+
+        if (count > 0) {
+          btn.innerText = "Verifying... " + count;
+        } else {
+          clearInterval(timer);
+
+          btn.innerText = "✅ Access Granted";
+
+          setTimeout(() => {
+
+            btn.innerText = "🔗 Open Destination";
+            btn.disabled = false;
+            btn.classList.remove("locked");
+            btn.classList.add("active");
+
+            btn.onclick = function () {
+              window.open(finalURL, "_blank");
+            };
+
+          }, 1500);
+        }
+
+      }, 1000);
+
+    };
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
+
+</body>
+
+</html>

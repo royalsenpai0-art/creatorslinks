@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>CreatorsLink</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+
+  <header>
+    <div class="nav-wrapper">
+
+      <div class="logo">CreatorsLink</div>
+
+      <div class="menu-toggle" onclick="toggleMenu()">⋮</div>
+
+      <div class="links" id="navLinks">
+        <a href="#">Home</a>
+        <a href="#works">How It Works</a>
+        <a href="#support">Support</a>
+      </div>
+
+    </div>
+  </header>
+
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero">
+    <h1>Create Powerful Unlock Links</h1>
+    <p>Protect your links behind social actions and grow faster.</p>
+    <a href="#create" class="hero-btn">Create Unlock Link</a>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features-section">
+
+    <h2>Why Choose CreatorsLink?</h2>
+    <p class="features-subtitle">
+      Everything you need to create powerful unlock links.
+    </p>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Fast Unlock Links</h3>
+        <p>Optimized for quick loading and smooth experience.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Links</h3>
+        <p>Your destination links stay protected behind tasks.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile Friendly</h3>
+        <p>Works perfectly on phones, tablets and desktops.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">♾️</div>
+        <h3>Unlimited Links</h3>
+        <p>Create as many unlock links as you want.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🚫</div>
+        <h3>Ad-Free Experience</h3>
+        <p>No annoying ads for your audience.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Grow Faster</h3>
+        <p>Increase subscribers, followers and engagement.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= MAIN CREATOR SECTION ================= -->
+
+  <section class="container" id="create">
+
+    <!-- STEP 1 -->
+    <div class="card">
+      <h2>1. Select Tasks</h2>
+
+      <div class="task-grid">
+
+        <!-- Default Tasks -->
+        <button class="task-btn active" onclick="toggleTask(this,'Subscribe')">
+          <span class="icon">🔴</span> Subscribe
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'2nd Subscribe')">
+          <span class="icon">🔴</span> 2nd Subscribe
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Like & Subscribe')">
+          <span class="icon">👍</span> Like & Subscribe
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Subscribe & Hit Bell')">
+          <span class="icon">🔔</span> Subscribe & Hit Bell
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Like Video')">
+          <span class="icon">👍</span> Like Video
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Like & Comment')">
+          <span class="icon">💬</span> Like & Comment
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Watch 1 Minute Video')">
+          <span class="icon">⏱</span> Watch 1 Minute Video
+        </button>
+
+        <!-- Social -->
+        <button class="task-btn" onclick="toggleTask(this,'Join Telegram')">
+          <span class="icon">📩</span> Join Telegram
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Join Discord')">
+          <span class="icon">🎧</span> Join Discord
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Follow Instagram')">
+          <span class="icon">📷</span> Follow Instagram
+        </button>
+
+        <button class="task-btn" onclick="toggleTask(this,'Follow Twitter')">
+          <span class="icon">🐦</span> Follow Twitter
+        </button>
+
+        <!-- Custom -->
+        <button class="task-btn" onclick="toggleCustomTask()">
+          <span class="icon">➕</span> Custom Task
+        </button>
+
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="card">
+        <h2>2. Add Task Links</h2>
+        <div id="taskInputs"></div>
+        <div id="customTaskModal" style="display:none;margin-top:15px;">
+
+          <input type="text" id="customTaskName" placeholder="Custom Task Name" style="width:100%;margin-bottom:10px;">
+
+          <input type="text" id="customTaskLink" placeholder="Custom Task Link" style="width:100%;margin-bottom:10px;">
+
+          <button class="generate-btn" onclick="addCustomTask()" style="width:100%;">
+            Add Custom Task
+          </button>
+
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="card">
+        <h2>3. Destination Link</h2>
+        <input type="text" id="destination" placeholder="https://your-link.com">
+      </div>
+
+      <!-- GENERATE BUTTON -->
+      <button class="generate-btn" onclick="createLink()">
+        Generate Unlock Link
+      </button>
+
+      <!-- RESULT BOX -->
+      <div id="resultBox" style="display:none;margin-top:20px;">
+        <input type="text" id="generatedLink" readonly>
+        <button id="copyBtn" class="copy-btn" onclick="copyLink()">
+          Copy
+        </button>
+
+      </div>
+
+  </section>
+
+  <!-- ================= HOW IT WORKS ================= -->
+
+  <section class="works" id="works">
+    <h2>How It Works</h2>
+
+    <div class="works-grid">
+      <div class="work-card">Select tasks</div>
+      <div class="work-card">Add task links</div>
+      <div class="work-card">Add destination</div>
+      <div class="work-card">Generate link</div>
+      <div class="work-card">Users complete tasks</div>
+      <div class="work-card">Destination unlocks</div>
+    </div>
+  </section>
+
+  <!-- ================= WHY SECTION ================= -->
+
+  <section class="why-section">
+    <div class="container">
+
+      <h2>Why CreatorsLink?</h2>
+      <p class="why-sub">
+        Advantages of CreatorsLink compared to other unlock tools
+      </p>
+
+      <div class="why-grid">
+
+        <div class="why-card">
+          <h3>Ad Free Experience</h3>
+          <p>
+            We provide a clean and ad-free unlock experience for your audience.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <h3>Free & Easy to Use</h3>
+          <p>
+            No signup required. Create and share unlock links instantly.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <h3>No Limits</h3>
+          <p>
+            Generate unlimited unlock links without restrictions.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <h3>Superfast Server</h3>
+          <p>
+            Optimized performance ensures fast and smooth unlocking.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <h3>Unlimited Tasks</h3>
+          <p>
+            Add multiple social tasks and custom tasks easily.
+          </p>
+        </div>
+
+        <div class="why-card">
+          <h3>Always Free Tool</h3>
+          <p>
+            CreatorsLink is built to stay simple, free and powerful.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section">
+
+    <h2>CreatorsLink In Numbers</h2>
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <h3>5000+</h3>
+        <p>Links Created</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>10000+</h3>
+        <p>Unlocks Completed</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>99.9%</h3>
+        <p>Uptime</p>
+      </div>
+
+      <div class="stat-card">
+        <h3>Fast</h3>
+        <p>Global Delivery</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="unlock-faq">
+
+    <div class="faq-container">
+
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is CreatorsLink free?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, CreatorsLink is completely free to use.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do users need an account?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No account is required to unlock links.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I add multiple tasks?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, you can add multiple social and custom tasks.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Does it work on mobile?
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, CreatorsLink is fully mobile responsive.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= SUPPORT ================= -->
+
+  <section class="support" id="support">
+    <h2>Customer Support</h2>
+    <a href="https://whatsapp.com/channel/0029VaedsAL5Ejy7eMvXcl21" target="_blank" class="support-btn">
+      Join WhatsApp Support
+    </a>
+  </section>
+  <div class="share-banner">
+
+    <h3>🚀 Enjoying CreatorsLink?</h3>
+
+    <p>
+      Share CreatorsLink with your friends and fellow creators.
+    </p>
+
+    <button onclick="shareWebsite()" class="share-btn">
+      📤 Share CreatorsLink
+    </button>
+
+  </div>
+  <footer>
+    © 2026 CreatorsLink |
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a>
+  </footer>
+  <!-- COOKIE NOTICE -->
+  <div id="cookieBanner" class="cookie-banner">
+    <div class="cookie-content">
+      <span>
+        We use cookies and may show ads to improve your experience.
+        <a href="/privacy.html">Privacy Policy</a>
+      </span>
+      <button id="acceptCookieBtn">Accept</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const banner = document.getElementById("cookieBanner");
+      const btn = document.getElementById("acceptCookieBtn");
+
+      if (localStorage.getItem("cookieAccepted") === "yes") {
+        banner.style.display = "none";
+      }
+
+      btn.addEventListener("click", function () {
+        localStorage.setItem("cookieAccepted", "yes");
+        banner.style.display = "none";
+      });
+
+    });
+  </script>
+  <script src="script.js"></script>
+
+  <div id="toast" class="toast">
+    ✅ Link Copied Successfully!
+</div>
+</body>
+
+</html>
